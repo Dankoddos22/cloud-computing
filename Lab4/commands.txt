@@ -7,3 +7,6 @@ aws ec2 run-instances --image-id ami-0a89646f76803f341 --count 2 --instance-type
 aws elbv2 create-target-group --name Lab4-Target-Group --target-type instance --protocol HTTP --port 80 --vpc-id vpc-7b7cd310
 aws elbv2 register-targets --target-group-arn arn:aws:elasticloadbalancing:us-east-2:374910219475:targetgroup/Lab4-Target-Group/ae85907c4ffc5b65 --targets Id=i-0aaec202464609838 Id=i-055b386bf33abdec0
 aws elbv2 create-listener --load-balancer-arn arn:aws:elasticloadbalancing:us-east-2:374910219475:loadbalancer/app/Lab4-ELB/1843a0075bdbb50c --protocol HTTP --port 80 --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-east-2:374910219475:targetgroup/Lab4-Target-Group/ae85907c4ffc5b65
+
+--Auto Scaling
+aws autoscaling create-auto-scaling-group --auto-scaling-group-name Lab4-AG --launch-template LaunchTemplateId=lt-070e65558a16d6543 --min-size 2 --max-size 2 --desired-capacity 2 --vpc-zone-identifier subnet-78502434 --target-group-arns arn:aws:elasticloadbalancing:us-east-2:374910219475:targetgroup/Lab4-Target-Group/ae85907c4ffc5b65
