@@ -17,7 +17,7 @@ aws cloudwatch put-metric-alarm \
 --threshold 2 \
 --comparison-operator LessThanThreshold \
 --dimensions $LB $TG \
---evaluation-periods 2 \
+--evaluation-periods 1 \
 --alarm-actions $TOPIC_ARN
 
 export TG_ARN="arn:aws:elasticloadbalancing:us-east-2:374910219475:targetgroup/Lab4-Target-Group/ae85907c4ffc5b65"
