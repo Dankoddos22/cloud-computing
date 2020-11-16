@@ -1,5 +1,3 @@
-export EMAIL="education.marianna@gmail.com"
-
 TOPIC_ARN=$(aws sns create-topic --name ELB-Check --query "TopicArn")
 
 export TOPIC_ARN="arn:aws:sns:us-east-2:374910219475:ELB-Check"
