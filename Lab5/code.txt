@@ -21,3 +21,11 @@ aws cloudwatch put-metric-alarm \
 --dimensions $LB $TG \
 --evaluation-periods 2 \
 --alarm-actions $TOPIC_ARN
+
+export TG_ARN="arn:aws:elasticloadbalancing:us-east-2:374910219475:targetgroup/Lab4-Target-Group/ae85907c4ffc5b65"
+
+export INSTANCE_ID="i-055b386bf33abdec0"
+
+aws elbv2 deregister-targets \
+--target-group-arn $TG_ARN \
+--targets Id=$INSTANCE_ID
