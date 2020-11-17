@@ -1,0 +1,15 @@
+AWS Notifications <no-reply@sns.amazonaws.com>
+
+Topic: ALARM: "elb-tg-notification" in US East (Ohio)
+
+You are receiving this email because your Amazon CloudWatch Alarm "elb-tg-notification" in the US East (Ohio) region has entered the ALARM state, because "Threshold Crossed: 1 datapoint [1.8 (16/11/20 19:28:00)] was less than the threshold (2.0)." at "Monday 16 November, 2020 19:33:58 UTC".
+
+View this alarm in the AWS Management Console:
+https://us-east-2.console.aws.amazon.com/cloudwatch/home?region=us-east-2#s=Alarms&alarm=elb-tg-notification
+
+Alarm Details:
+- Name:                       elb-tg-notification
+- Description:               
+- State Change:               OK -> ALARM
+- Reason for State Change:    Threshold Crossed: 1 datapoint [1.8 (16/11/20 19:28:00)] was less than the threshold (2.0).
+- Timestamp:                  Monday 16 November, 2020 19:33:58 UTC
