@@ -12,7 +12,7 @@ aws lambda create-function --function-name CreateThumbnail \
 --zip-file fileb://function.zip \
 --handler index.handler \
 --runtime nodejs12.x --timeout 10 --memory-size 1024 \
---role arn:aws:iam::499175444987:role/lambda-s3-role \
+--role arn:aws:iam::[account-id]:role/lambda-s3-role \
 --cli-binary-format raw-in-base64-out
 
 cd ..
@@ -25,6 +25,6 @@ aws lambda invoke --function-name CreateThumbnail \
 aws lambda add-permission --function-name CreateThumbnail \
 --principal s3.amazonaws.com --statement-id s3invoke \
 --action "lambda:InvokeFunction" \
---source-arn arn:aws:s3:::marianna-8 --source-account account-id
+--source-arn arn:aws:s3:::marianna-8 --source-account [account-id]
 
 aws lambda get-policy --function-name CreateThumbnail
