@@ -1,6 +1,6 @@
 TOPIC_ARN=$(aws sns create-topic --name ELB-Check --query "TopicArn")
 
-export TOPIC_ARN="arn:aws:sns:us-east-2:374910219475:ELB-Check"
+export TOPIC_ARN="arn:aws:sns:us-east-2:[account-id]:ELB-Check"
 
 aws sns subscribe --topic-arn $TOPIC_ARN --protocol email --notification-endpoint $EMAIL
 
@@ -20,7 +20,7 @@ aws cloudwatch put-metric-alarm \
 --evaluation-periods 1 \
 --alarm-actions $TOPIC_ARN
 
-export TG_ARN="arn:aws:elasticloadbalancing:us-east-2:374910219475:targetgroup/Lab4-Target-Group/ae85907c4ffc5b65"
+export TG_ARN="arn:aws:elasticloadbalancing:us-east-2:[account-id]:targetgroup/Lab4-Target-Group/ae85907c4ffc5b65"
 
 export INSTANCE_ID="i-055b386bf33abdec0"
 
