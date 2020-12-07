@@ -87,25 +87,14 @@ resource "aws_network_acl" "acl" {
   }
 }
 
-resource "aws_network_acl_rule" "acl_rule" {
-  network_acl_id = aws_network_acl.acl.id
-  rule_number    = 300
-  egress         = false
-  protocol       = -1
-  rule_action    = "deny"
-  cidr_block     = "50.31.252.0/24"
-  from_port      = 0
-  to_port        = 0
-}
-
 resource "aws_security_group" "db_sg" {
   name   = "Lab7_RDS_SG"
   vpc_id = aws_vpc.main_vpc.id
 
   ingress {
-    from_port   = 0
-    protocol    = -1
-    to_port     = 0
+    from_port   = 3306
+    protocol    = "tcp"
+    to_port     = 3306
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -118,6 +107,15 @@ resource "aws_security_group" "db_sg" {
 
   tags = {
     Name = "Lab7_RDS_SG"
+  }
+}
+
+resource "aws_db_security_group" "rds_sg" {
+  name = "rds_sg"
+
+  ingress {
+    cidr              = "0.0.0.0/0"
+    security_group_id = aws_security_group.db_sg.id
   }
 }
 
@@ -141,6 +139,6 @@ resource "aws_db_instance" "rds_db" {
   password               = var.MYSQL_PWD //  export TF_VAR_MYSQL_PWD='password'
   parameter_group_name   = "default.mysql5.7"
   publicly_accessible    = true
-  vpc_security_group_ids = [aws_security_group.db_sg.id]
+  vpc_security_group_ids = [aws_db_security_group.rds_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.id
 }
