@@ -7,8 +7,8 @@ provider "aws" {
 
 resource "aws_vpc" "main_vpc" {
   cidr_block           = "10.0.0.0/16"
-  instance_tenancy     = "default"
   enable_dns_hostnames = true
+  enable_dns_support   = true
 
   tags = {
     "Name" = "Lab7_VPC"
@@ -66,27 +66,23 @@ resource "aws_route_table_association" "a" {
   route_table_id = aws_route_table.r.id
 }
 
-/*resource "aws_network_acl" "acl" {
-  vpc_id = aws_vpc.main_vpc.id
+resource "aws_route_table_association" "b" {
+  subnet_id      = aws_subnet.subnet2.id
+  route_table_id = aws_route_table.r.id
+}
 
-  egress {
-    protocol   = -1
-    rule_no    = 200
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 0
-    to_port    = 0
-  }
+resource "aws_network_acl" "acl" {
+  vpc_id = aws_vpc.main_vpc.id
 
   ingress {
     protocol   = -1
     rule_no    = 100
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
+    action     = "deny"
+    cidr_block = "50.31.252.0/24"
     from_port  = 0
     to_port    = 0
   }
-}*/
+}
 
 resource "aws_security_group" "db_sg" {
   name   = "Lab7_RDS_SG"
@@ -102,7 +98,7 @@ resource "aws_security_group" "db_sg" {
   egress {
     from_port   = 0
     to_port     = 0
-    protocol    = "-1"
+    protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
 
