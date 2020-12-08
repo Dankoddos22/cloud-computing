@@ -76,7 +76,7 @@ resource "aws_network_acl" "acl" {
 
   ingress {
     protocol   = -1
-    rule_no    = 100
+    rule_no    = 200
     action     = "deny"
     cidr_block = "50.31.252.0/24"
     from_port  = 0
